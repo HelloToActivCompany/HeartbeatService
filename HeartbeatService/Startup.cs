@@ -80,13 +80,9 @@ namespace HeartbeatService
                     }
                     catch (Exception) { }
                 }
-
-                //invoke himself
-                var controller = new HomeController(repository);
-                controller.Index();
             }),
             null,
-            0,
+            1000,
             timerPeriod);
         }
     }
