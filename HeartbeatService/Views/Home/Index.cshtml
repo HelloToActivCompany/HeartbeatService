@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HeartbeatService.Models.Endpoint>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="panel-body">
+    <h2>Here is the list of endpoints for heartbeat</h2>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th width="30px">Id</th>
+                <th width="100%">Url</th>
+                <th width="30px">
+                    del
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td></td>
+                    <td><span>List is empty .. ~_~</span></td>
+                    <td></td>
+                </tr>
+            }
+            else
+            {
+                foreach (HeartbeatService.Models.Endpoint p in Model)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.Url</td>
+                        <td>
+                            <a href="@Url.Action("Remove", "Home", new { id = p.Id })" title="Remove">
+                                <img src="~/images/delimage.png" style="width:20px;"/>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <form class="p-a-1" asp-action="Add" asp-controller="Home" method="post" asp-anti-forgery="true">
+        <div class="form-group">
+            <label name = "Url">Endpoint url:</label>
+            <input name = "Url" />
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit Endpoint</button>
+        </div>
+</form>
+</div>
